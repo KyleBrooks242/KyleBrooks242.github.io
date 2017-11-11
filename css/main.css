@@ -1,0 +1,18 @@
+html,body { height: 100%; margin: 0px; padding: 0px; }
+
+#sidebar{
+	float: right;
+	background: #696969;
+	max-width: 350px;
+	color: white;
+	display: block;
+	height: 100%;
+}
+
+#dayOfWeek {
+	padding-top: 50px;
+}
+
+label {
+	padding-right: 20px;
+}

@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang='en'>
     <head>  
-        <title>CHANGE ME</title>
+        <title>Predictive Incident Indicator</title>
                     
 		<meta id='meta-viewport' name='viewport' content='width=device-width'>
-		<link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700'>
         <link rel='stylesheet' href='css/bootstrap.css'>
         <link rel='stylesheet' href='css/main.css'>
     </head>                 
 
     <body>                  
-		Hello World
-        <script src='js/underscore-min.js'></script>
+		<div id='map'></div>
+		
+		<div id='sidebar'>
+			<span><b>Welcome to Predictive Incident Indicator!</b><br><br></span>
+			<span>Please use the options below to get started</span>
+			<div id="dayOfWeek">
+			<label for='dayOfWeekSelection'>Day of the week:</label>
+				<select id='dayOfWeekSelection'>
+				    <option value="sunday">Sunday</option>
+				    <option value="monday">Monday</option>
+				    <option value="tuesday">Tuesday</option>
+				    <option value="wednesday">Wednesday</option>
+					<option value="thursday">Thursday</option>					  
+					<option value="friday">Friday</option>
+					<option value="saturday">Saturday</option>
+				</select>
+			</div>
+		</div>
+		
+		<script async defer
+  			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjOqJyUHR9X1-X6SB4O7jfe3jYipkK8B8&onLoad=init">
+		</script>
+        <script src='js/main.js'></script>
         <script src='js/jquery.min.js'></script>
     </body>
 </html>
