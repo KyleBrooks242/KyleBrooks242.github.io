@@ -24,3 +24,9 @@ example_measures = np.array(X_train[0])
 example_measures = example_measures.reshape(1, -1)
 prediction = clf.predict(example_measures)
 print(prediction)
+
+def predict(time, latitude, longitude):
+    result = np.array([time, latitude, longitude])
+    result = result.reshape(1, -1)
+    prediction = clf.predict(result)
+    return prediction
