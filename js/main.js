@@ -30,13 +30,14 @@ $('#testButton').click(function(){
     console.log("posting to AjaxPost.py")
 
     $.ajax({
-        url: "AjaxPost.py",
-        type: "post",
-        datatype:"json",
+        url: '/predictAccident',
         data: {'key':'value','key2':'value2'},
-        success: function(response){
-            alert(response.message);
-            alert(response.keys);
+        type: 'POST',
+        success: function(response) {
+            console.log(response);
+        },
+        error: function(error) {
+            console.log(error);
         }
     });
 });
