@@ -27,13 +27,13 @@ function initMap() {
 }
 
 $('#testButton').click(function(){
-	console.log("PLEASE WORK NOW, but for real");
+	console.log("trying a get");
 	var user = "username@email.com";
 	var pass = "password";
 	$.ajax({
 		url: '/signUpUser/',
 		data: {"username":user, "password":pass},
-		type: 'POST',
+		type: 'GET',
 		success: function(response){
 			console.log(response);
 		},

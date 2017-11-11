@@ -12,7 +12,7 @@ def signUp():
     print("got in get")
     return render_template('signUp.html')
 
-@app.route('/signUpUser', methods=['POST'])
+@app.route('/signUpUser', methods=['GET'])
 def signUpUser():
     print("got in post")
     user =  request.form['username'];
