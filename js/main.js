@@ -30,64 +30,64 @@ function initMap() {
 	
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	
-//	// Charlotte map marker
-//	var marker = new google.maps.Marker({
-//		position: myLatLng,
-//		map: map,
-//		title: 'Charlotte, NC'
-//	});
-//	
-//	var contentString = '<div id="content">'+
-//	'<h1>Charlotte, NC</h1>'+ 'Welcome to the Queen City!'
-//	'</div>';
-//	
-//	var infowindow = new google.maps.InfoWindow({
-//		content: contentString
-//	});
-//	
-//	marker.addListener('click', function() {
-//		infowindow.open(map, marker);
-//	});
-//	
-//	
-//	// PNC Pavillion map marker
-//	var pncMarker = new google.maps.Marker({
-//		position: pncMusicPavillionLatLng,
-//		map: map,
-//		title: 'PNC Music Pavillion'
-//	});
-//	
-//	var pncContentString = '<div id="content">'+
-//	'<h1>PNC Music Pavillion</h1>'+ 'Music Venue'
-//	'</div>';
-//	
-//	var pncInfowindow = new google.maps.InfoWindow({
-//		content: pncContentString
-//	});
-//	
-//	pncMarker.addListener('click', function() {
-//		pncInfowindow.open(map, pncMarker);
-//	});
-//	
-//	
-//	// Spectrum Center
-//	var spectrumMarker = new google.maps.Marker({
-//		position: spectrumLatLng,
-//		map: map,
-//		title: 'Spectrum Center'
-//	});
-//	
-//	var spectrumContentString = '<div id="content">'+
-//	'<h1>Spectrum Center</h1>'+ 'Arena'
-//	'</div>';
-//	
-//	var spectrumInfowindow = new google.maps.InfoWindow({
-//		content: spectrumContentString
-//	});
-//	
-//	spectrumMarker.addListener('click', function() {
-//		spectrumInfowindow.open(map, spectrumMarker);
-//	});
+	// Charlotte map marker
+	var marker = new google.maps.Marker({
+		position: myLatLng,
+		map: map,
+		title: 'Charlotte, NC'
+	});
+	
+	var contentString = '<div id="content">'+
+	'<h1>Charlotte, NC</h1>'+ 'Welcome to the Queen City!'
+	'</div>';
+	
+	var infowindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+	
+	marker.addListener('click', function() {
+		infowindow.open(map, marker);
+	});
+	
+	
+	// PNC Pavillion map marker
+	var pncMarker = new google.maps.Marker({
+		position: pncMusicPavillionLatLng,
+		map: map,
+		title: 'PNC Music Pavillion'
+	});
+	
+	var pncContentString = '<div id="content">'+
+	'<h1>PNC Music Pavillion</h1>'+ 'Music Venue'
+	'</div>';
+	
+	var pncInfowindow = new google.maps.InfoWindow({
+		content: pncContentString
+	});
+	
+	pncMarker.addListener('click', function() {
+		pncInfowindow.open(map, pncMarker);
+	});
+	
+	
+	// Spectrum Center
+	var spectrumMarker = new google.maps.Marker({
+		position: spectrumLatLng,
+		map: map,
+		title: 'Spectrum Center'
+	});
+	
+	var spectrumContentString = '<div id="content">'+
+	'<h1>Spectrum Center</h1>'+ 'Arena'
+	'</div>';
+	
+	var spectrumInfowindow = new google.maps.InfoWindow({
+		content: spectrumContentString
+	});
+	
+	spectrumMarker.addListener('click', function() {
+		spectrumInfowindow.open(map, spectrumMarker);
+	});
 	
 	var trafficLayer = new google.maps.TrafficLayer();
 	trafficLayer.setMap(map);
@@ -155,16 +155,14 @@ function initMap() {
     
     var myMarker = new google.maps.Marker({
         position: new google.maps.LatLng(myLatLng),
-        draggable: true
+        draggable: true,
+        map: map,
+        icon: 'blue_MarkerH.png'
     });
     
-    google.maps.event.addListener(myMarker, 'dragendMarker', function(evt){
+    google.maps.event.addListener(myMarker, 'dragend', function(evt){
         $( "#lat" ).val(evt.latLng.lat());
-        $( "#lng" ).val(evt.latLng.lng());
-    });
-
-    google.maps.event.addListener(myMarker, 'dragstartMarker', function(evt){
-        document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+        $( "#long" ).val(evt.latLng.lng());
     });
     
     map.setCenter(myMarker.position);
