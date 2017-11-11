@@ -265,13 +265,19 @@ function initMap() {
 	    	});
 	    circle.bindTo('center', myMarker, 'position');
 	    
-	    alert("here");
+	    var randomPoints = [];
+	    for (i = 0; i < 20; i++) {
+	    	var dict = getRandomLatLong(lat, long, radius * 1609.34);
+	    	randomPoints.push(dict);
+	    }
     	
-    	console.log(dayOfWeek + " " + time + " " + lat + " " + long + " " + radius);
         $.ajax({
             url: 'http://127.0.0.1:5000/predictIncident',
-            data: {'dayOfWeek':dayOfWeek, 'time':time, 'lat':lat, 'long':long},
+            data: JSON.stringify({"dayOfWeek":dayOfWeek, "time":time, "lat":lat+"", "long":long+"", "radius": radius, 
+            	"latLngPoints": randomPoints}),
             type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
             success: function(response){
             	alert("here");
                 console.log(response);
@@ -291,6 +297,35 @@ function initMap() {
         });
     });
 }
+
+function getRandomLatLong (latitude, longitude, radiusInMeters) {
+
+    var getRandomCoordinates = function (radius, uniform) {
+        var a = Math.random(),
+            b = Math.random();
+        if (uniform) {
+            if (b < a) {
+                var c = b;
+                b = a;
+                a = c;
+            }
+        }
+        return [
+            b * radius * Math.cos(2 * Math.PI * a / b),
+            b * radius * Math.sin(2 * Math.PI * a / b)
+        ];
+    };
+    var randomCoordinates = getRandomCoordinates(radiusInMeters, true);
+    var earth = 6378137;
+    var northOffset = randomCoordinates[0],
+        eastOffset = randomCoordinates[1];
+    var offsetLatitude = northOffset / earth,
+        offsetLongitude = eastOffset / (earth * Math.cos(Math.PI * (latitude / 180)));
+    return {
+        latitude: latitude + (offsetLatitude * (180 / Math.PI)),
+        longitude: longitude + (offsetLongitude * (180 / Math.PI))
+    }
+};
 
 $( "#lat" ).val("35.2271");
 
