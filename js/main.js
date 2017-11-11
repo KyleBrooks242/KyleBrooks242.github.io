@@ -9,6 +9,8 @@ function initMap() {
 	
 	var spectrumLatLng = {lat: 35.2251, lng: -80.8392};
 	
+	var carowindsLatLng = {lat: 35.0985, lng: -80.9354};
+	
 	var maxZoomLevel = 11;
 	
 	var mapOptions = {
@@ -91,6 +93,26 @@ function initMap() {
 	
 	spectrumMarker.addListener('click', function() {
 		spectrumInfowindow.open(map, spectrumMarker);
+	});
+	
+	
+	// Carowinds
+	var carowindsMarker = new google.maps.Marker({
+		position: carowindsLatLng,
+		map: map,
+		title: 'Carowinds'
+	});
+	
+	var carowindsContentString = '<div id="content">'+
+	'<h1>Carowinds</h1>'+ 'Theme park'
+	'</div>';
+	
+	var carowindsInfowindow = new google.maps.InfoWindow({
+		content: carowindsContentString
+	});
+	
+	carowindsMarker.addListener('click', function() {
+		carowindsInfowindow.open(map, carowindsMarker);
 	});
 	
 	var trafficLayer = new google.maps.TrafficLayer();
