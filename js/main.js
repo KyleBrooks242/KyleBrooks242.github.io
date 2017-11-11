@@ -242,8 +242,8 @@ function initMap() {
     $('#goButton').click(function(){
     	var dayOfWeek = $("#dayOfWeekSelection").find(":selected").text();
     	var time = $("#time").val();
-    	var lat = parseInt($("#lat").val());
-    	var long = parseInt($("#long").val());
+    	var lat = parseFloat($("#lat").val());
+    	var long = parseFloat($("#long").val());
     	var radius = $("#radius").val();
     	
     	myMarker.setMap(null);
@@ -253,7 +253,10 @@ function initMap() {
             map: map,
             icon: 'blue_MarkerH.png'
         });
+    	
     	myMarker.setMap(map);
+    	map.setCenter(myMarker.position);
+    	
     	circle.setMap(null);
 	    circle = new google.maps.Circle({
 	    	  map: map,
@@ -276,7 +279,17 @@ function initMap() {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(response){
+            	alert("here");
                 console.log(response);
+                
+                var responseContentString = '<div id="content">'+
+            	'<h1>Incident Prediction:</h1>' + response +  '</div>';
+            	
+            	var responseInfowindow = new google.maps.InfoWindow({
+            		content: responseContentString
+            	});
+            	
+            	responseInfowindow.open(map, this);
             },
             error: function(error){
                 console.log(error);
@@ -316,7 +329,7 @@ function getRandomLatLong (latitude, longitude, radiusInMeters) {
 
 $( "#lat" ).val("35.2271");
 
-$( "#long" ).val("80.8431");
+$( "#long" ).val("-80.8431");
 
 var now = new Date();
 
@@ -324,5 +337,5 @@ hours = now.getHours();
 //if (now.getHours().includes("0"))
 //	hours = "0" + now.getHours();
 	
-now = "0" + hours + ':' + now.getMinutes() + ":" + now.getSeconds();
+now = hours + ':' + now.getMinutes() + ":" + now.getSeconds();
 $( "#time").val(now);
