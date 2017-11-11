@@ -17,9 +17,10 @@ def predictIncident():
     radius = request.form['radius']
     latLngPoints = request.form['latLngPoints']
     
-    dicDayValues = {'Sunday':'0','Monday':'1', 'Tuesday':'2','Wednesday':'3',
+    dicDayValues = {'Sunday':'0','Monday':'1','Tuesday':'2','Wednesday':'3',
                     'Thursday':'4','Friday':'5','Saturday':'6'}
     
+
     latPoints = []
     lngPoints = []
     counter = 0;
@@ -33,24 +34,29 @@ def predictIncident():
     #We need to remove radius and replace it with a list latitude, longitude values
     modePrimaryCause = FindMode.findMode(day, lat[0], long[0], radius)
     modeCrashType = FindMode.findMode(day, lat[0], long[0], radius)
+    print("modePrimaryCause ", modePrimaryCause)
+    print("modeCrashType ", modeCrashType)
         
-    pCDataFrame = pd.DataFrame()
-    cTDataFrame = pd.DataFrame
-    for i in len(lat):
-        pCDataFrame.append(KNNModel.predict(time, latitude[i], longitude[i]))
-        cTDataFrame.append(KNNModel.predict(time, latitude[i], longitude[i]))
-        
-    predictedPrimaryCauseVal = pCDataFrame.mode()
-    predictedCrashTypeVal = cTDataFrame.mode()
+   
     
+
+    primaryCauseResult = KNNModel.predict(time, lat[0], long[0])
+    crashType = KNNModel.predict(time, lat[0], long[0])
+#         pCDataFrame.append(KNNModel.predict(time, lat[i], long[i]))
+#         cTDataFrame.append(KNNModel.predict(time, lat[i], long[i]))
+
+
+#     pCDataFrame.append(KNNModel.predict(time, latitude[i], longitude[i]))
+#     cTDataFrame.append(KNNModel.predict(time, latitude[i], longitude[i]))
+        
     dicPrimaryCause, dicCrashType = loadDictionaries()
     
-    predictedPrimaryCause = dicPrimaryCause.get(predictedPrimaryCauseVal)
-    predictedCrashType = dicCrashType.get(predictedCrashTypeVal)
+    predictedPrimaryCause = dicPrimaryCause[primaryCauseResult[0]]
+    predictedCrashType = dicCrashType[crashType[0]]
     
     print("Done")
     return json.dumps({'status':'OK','modePrimaryCause':modePrimaryCause,'modeCrashType':modeCrashType,
-                       'predictedPrimaryCause':"primaryCause",'predictedCrashType':"predictedCrashType"})
+                       'predictedPrimaryCause':predictedPrimaryCause,'predictedCrashType':predictedCrashType})
     #return json.dumps({'status':'OK','user':user,'pass':password})
 
 def loadDictionaries():
@@ -65,4 +71,6 @@ def loadDictionaries():
     return dicPrimaryCause, dicCrashType
 
 if __name__=="__main__":
-    app.run()
+    #app.run()
+    predictIncident();
+    

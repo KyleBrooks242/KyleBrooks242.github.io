@@ -21,8 +21,8 @@ def findMode(dow, lat, log, radius):
     modePrimaryCauseVal = df_filtered['PRIMARY_CAUSE_CD'].mode()
     modeCrashTypeVal = df_filtered['CRSH_TYPE_CD'].mode()
     
-    modePrimaryCause = dicPrimaryCause.get(round(modePrimaryCauseVal[0]))
-    modeCrashType = dicCrashType.get(round(modeCrashTypeVal[0]))
+    modePrimaryCause = dicPrimaryCause[modePrimaryCauseVal[0]]
+    modeCrashType = dicCrashType[modeCrashTypeVal[0]]
     
     if (modePrimaryCause == None):
         modePrimaryCause = "Predicted Primary Cause was out of defined range."
