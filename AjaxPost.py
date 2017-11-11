@@ -1,17 +1,27 @@
-#!/usr/bin/env python   
-    
-from flask import Flask
-app = Flask(__name__)
+import web
  
-@app.route("/")
-def hello():
-    return "Welcome to Python Flask!"
-
-@app.route('/signUpUser', methods=['POST'])
-def signUpUser():
-    user =  request.form['username'];
-    password = request.form['password'];
-    return json.dumps({'status':'OK','user':user,'pass':password});
+def make_text(string):
+    return string
  
-if __name__ == "__main__":
+urls = ('/', 'tutorial')
+render = web.template.render('templates/')
+ 
+app = web.application(urls, globals())
+ 
+my_form = web.form.Form(
+                web.form.Textbox('', class_='textfield', id='textfield'),
+                )
+ 
+class tutorial:
+    def GET(self):
+        form = my_form()
+        return render.tutorial(form, "Your text goes here.")
+         
+    def POST(self):
+        form = my_form()
+        form.validates()
+        s = form.value['textfield']
+        return make_text(s)
+ 
+if __name__ == '__main__':
     app.run()
