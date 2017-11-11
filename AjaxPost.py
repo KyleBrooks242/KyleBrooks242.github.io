@@ -1,9 +1,17 @@
-#!/usr/bin/env python
-from flask import render_template
-     
+#!/usr/bin/env python   
     
-@app.route('/predictAccident', methods=['POST'])
-def predictAccident():
-    val =  request.form['key'];
-    val2 = request.form['key2'];
-    return json.dumps({'status':'OK','key':val,'key2':val2});
+from flask import Flask
+app = Flask(__name__)
+ 
+@app.route("/")
+def hello():
+    return "Welcome to Python Flask!"
+
+@app.route('/signUpUser', methods=['POST'])
+def signUpUser():
+    user =  request.form['username'];
+    password = request.form['password'];
+    return json.dumps({'status':'OK','user':user,'pass':password});
+ 
+if __name__ == "__main__":
+    app.run()
