@@ -25,3 +25,20 @@ function initMap() {
 	
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
+
+$('#testButton').click(function(){
+	console.log("PLEASE WORK NOW, but for real");
+	var user = "username@email.com";
+	var pass = "password";
+	$.ajax({
+		url: '/signUpUser/',
+		data: {"username":user, "password":pass},
+		type: 'POST',
+		success: function(response){
+			console.log(response);
+		},
+		error: function(error){
+			console.log(error);
+		}
+	});
+});
