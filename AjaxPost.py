@@ -22,7 +22,7 @@ def test():
     vars = request.data
     return ', '.join([str(i) for i in vars])
 
-@app.route('/test2/',methods=['POST', 'GET'])
+@app.route('/kylebrooks242.github.io/test2/',methods=['POST', 'GET'])
 def ajaxcalc():
     vars = request.data
     return ', '.join([str(i) for i in vars])
