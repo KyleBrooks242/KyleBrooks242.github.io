@@ -29,7 +29,7 @@ function initMap() {
 $('#testButton').click(function(){
 	 console.log("test");
 	 $.ajax({
-           type: "PUT",
+           type: "GET",
            headers: {"Content-Type": "application/json"},
            url: "/test/",
            data: JSON.stringify({"key": "value"}),
