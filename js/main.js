@@ -1,5 +1,4 @@
-function initMap() {
-	
+function initMap() {	
 	var myLatLng = {lat: 35.2271, lng: -80.8431};
 	
 	var pncMusicPavillionLatLng = {lat: 35.3274, lng: -80.7107};
@@ -159,3 +158,17 @@ function initMap() {
 $( "#lat" ).val("35.2271");
 
 $( "#long" ).val("80.8431");
+
+$('#goButton').click(function(){
+        $.ajax({
+            url: 'http://127.0.0.1:5000/predictIncident',
+            data: {"username":"username","password":"password"},
+            type: 'POST',
+            success: function(response){
+                console.log(response);
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+});
