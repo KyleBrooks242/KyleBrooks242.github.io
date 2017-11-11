@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
     <head>  
-        <title>CHANGE ME</title>
+        <title>Predictive Incident Indicator</title>
                     
 		<meta id='meta-viewport' name='viewport' content='width=device-width'>
         <link rel='stylesheet' href='css/bootstrap.css'>
@@ -11,28 +11,21 @@
     <body>                  
 		<div id='map'></div>
 		
-		<div id='sidebar' class='wrapper'>
-			<nav id="sidebar">
-		        <div class="sidebar-header">
-		            <h3>Collapsible Sidebar</h3>
-		        </div>
-		
-		        <ul class="list-unstyled components">
-		            <li class="active"><a href="#">Home</a></li>
-		            <li><a href="#">About</a></li>
-		
-		            <li>
-		                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-		                <ul class="collapse list-unstyled" id="homeSubmenu">
-		                    <li><a href="#">Page</a></li>
-		                    <li><a href="#">Page</a></li>
-		                    <li><a href="#">Page</a></li>
-		                </ul>
-		
-		            <li><a href="#">Portfolio</a></li>
-		            <li><a href="#">Contact</a></li>
-		        </ul>
-    		</nav>
+		<div id='sidebar'>
+			<span><b>Welcome to Predictive Incident Indicator!</b><br><br></span>
+			<span>Please use the options below to get started</span>
+			<div id="dayOfWeek">
+			<label for='dayOfWeekSelection'>Day of the week:</label>
+				<select id='dayOfWeekSelection'>
+				    <option value="sunday">Sunday</option>
+				    <option value="monday">Monday</option>
+				    <option value="tuesday">Tuesday</option>
+				    <option value="wednesday">Wednesday</option>
+					<option value="thursday">Thursday</option>					  
+					<option value="friday">Friday</option>
+					<option value="saturday">Saturday</option>
+				</select>
+			</div>
 		</div>
 		
 		<script async defer
