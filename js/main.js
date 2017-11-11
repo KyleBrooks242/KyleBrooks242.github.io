@@ -26,7 +26,7 @@ function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
 
-$(".button").click(function() {
+$("#testButton").click(function() {
 	console.log("testing a post");
     var input_string = "Test";
     $.ajax({
@@ -37,5 +37,4 @@ $(".button").click(function() {
             },
             });
     return false;
-    });
 });
