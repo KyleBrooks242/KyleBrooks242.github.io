@@ -264,14 +264,26 @@ function initMap() {
 	    	  fillColor: '#AA0000'
 	    	});
 	    circle.bindTo('center', myMarker, 'position');
+	    
+	    alert("here");
     	
     	console.log(dayOfWeek + " " + time + " " + lat + " " + long + " " + radius);
         $.ajax({
             url: 'http://127.0.0.1:5000/predictIncident',
-            data: {"dayOfWeek":dayOfWeek, "time":time, "lat":lat, "long":long},
+            data: {'dayOfWeek':dayOfWeek, 'time':time, 'lat':lat, 'long':long},
             type: 'POST',
             success: function(response){
+            	alert("here");
                 console.log(response);
+                
+                var responseContentString = '<div id="content">'+
+            	'<h1>Incident Prediction:</h1>' + response +  '</div>';
+            	
+            	var responseInfowindow = new google.maps.InfoWindow({
+            		content: responseContentString
+            	});
+            	
+            	responseInfowindow.open(map, this);
             },
             error: function(error){
                 console.log(error);
@@ -282,7 +294,7 @@ function initMap() {
 
 $( "#lat" ).val("35.2271");
 
-$( "#long" ).val("80.8431");
+$( "#long" ).val("-80.8431");
 
 var now = new Date();
 
@@ -290,5 +302,5 @@ hours = now.getHours();
 //if (now.getHours().includes("0"))
 //	hours = "0" + now.getHours();
 	
-now = "0" + hours + ':' + now.getMinutes() + ":" + now.getSeconds();
+now = hours + ':' + now.getMinutes() + ":" + now.getSeconds();
 $( "#time").val(now);
