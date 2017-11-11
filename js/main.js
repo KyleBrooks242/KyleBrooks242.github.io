@@ -27,6 +27,7 @@ function initMap() {
 }
 
 $('#testButton').click(function(){
+<<<<<<< HEAD
 		$.ajax({
 			url: 'http://127.0.0.1:5000/predictIncident',
 			data: {"username":"username","password":"password"},
@@ -39,3 +40,20 @@ $('#testButton').click(function(){
 			}
 		});
 	});
+=======
+	 console.log("test");
+	 $.ajax({
+           type: "GET",
+           headers: {"Content-Type": "application/json"},
+           url: "/kylebrooks242.github.io/test2/",
+           data: JSON.stringify({"key": "value"}),
+           success: function(response) {
+               console.log(response);
+           },
+           error: function(response, error) {
+               console.log(response);
+               console.log(error);
+           }
+       });
+});
+>>>>>>> branch 'master' of https://github.com/KyleBrooks242/KyleBrooks242.github.io.git
