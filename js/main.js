@@ -27,18 +27,15 @@ function initMap() {
 }
 
 $('#testButton').click(function(){
-	 console.log("test");
-	 $.ajax({
-           type: "POST",
-           headers: {"Content-Type": "application/json"},
-           url: "http://localhost:5000/test",
-           data: JSON.stringify({"key": "value"}),
-           success: function(response) {
-               console.log(response);
-           },
-           error: function(response, error) {
-               console.log(response);
-               console.log(error);
-           }
-       });
-});
+		$.ajax({
+			url: 'http://127.0.0.1:5000/predictIncident',
+			data: {"username":"username","password":"password"},
+			type: 'POST',
+			success: function(response){
+				console.log(response);
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});
+	});
