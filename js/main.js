@@ -25,3 +25,18 @@ function initMap() {
 	
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
+
+$('#testButton').click(function(){
+    console.log("posting to AjaxPost.py")
+
+    $.ajax({
+        url: "AjaxPost.py",
+        type: "post",
+        datatype:"json",
+        data: {'key':'value','key2':'value2'},
+        success: function(response){
+            alert(response.message);
+            alert(response.keys);
+        }
+    });
+});
