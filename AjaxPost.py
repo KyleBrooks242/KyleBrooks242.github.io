@@ -10,22 +10,26 @@ app = Flask(__name__)
 
 @app.route('/predictIncident', methods=['POST'])
 def predictIncident():
-#     dayOfWeek =  request.form['dayOfWeek']
-#     time = request.form['time']
-#     lat = request.form['lat']
-#     long = request.form['long']
-
-    dayOfWeek = "Sunday"
-    time = 000
-    radius = 20
-    lat = [35, 22, -15, 7]
-    long = [-80, 9, 29, 17]
+    dayOfWeek =  request.form['dayOfWeek']
+    time = request.form['time']
+    lat = request.form['lat']
+    long = request.form['long']
+    radius = request.form['radius']
+    latLngPoints = request.form['latLngPoints']
     
     dicDayValues = {'Sunday':'0','Monday':'1','Tuesday':'2','Wednesday':'3',
                     'Thursday':'4','Friday':'5','Saturday':'6'}
     
-#     day = dicDayValues.get(dayOfWeek)
-    day = dayOfWeek
+
+    latPoints = []
+    lngPoints = []
+    counter = 0;
+    for key, value in latLngPoints.items():
+        latPoints[counter] = key
+        lngPoints[counter] = value
+        counter = counter + 1
+        
+    day = dicDayValues.get(dayOfWeek)
     #Calculate mode Primary Cause and Crash Type for comparison to our model's return data
     #We need to remove radius and replace it with a list latitude, longitude values
     modePrimaryCause = FindMode.findMode(day, lat[0], long[0], radius)
