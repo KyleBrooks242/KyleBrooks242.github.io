@@ -1,49 +1,26 @@
-#!/usr/bin/env python
+import os
+from flask import Flask,render_template, request,json
 
-from tornado.options import options, define, parse_command_line
-import tornado.httpserver
-import tornado.ioloop
-import tornado.web
-import tornado.wsgi
-import tornado.websocket
-import json
+app = Flask(__name__)
 
-define('port', type=int, default=8080)
+@app.route('/')
+def hello():
+    return 'Welcome to Python Flask!'
 
-class HelloHandler(tornado.web.RequestHandler):
-  def get(self):
-    self.write('Hello from tornado')
+@app.route('/signUp')
+def signUp():
+    return render_template('signUp.html')
 
-class MyWebSocket(tornado.websocket.WebSocketHandler):
-  clients = []
-
-  def open(self):
-    # clients must be accessed through class object!!!
-    MyWebSocket.clients.append(self)
-    print ("\nWebSocket opened")
-
-  def on_message(self, message):
-    print ("msg recevied"), message
-    msg = json.loads(message) # todo: safety?
-
-    # send other clients this message
-    for c in MyWebSocket.clients:
-      if c != self:
-        c.write_message(msg)
-
-  def on_close(self):
-    print ("WebSocket closed")
-    # clients must be accessed through class object!!!
-    MyWebSocket.clients.remove(self)
-
-def main():
-  tornado_app = tornado.web.Application([
-      ('/hello-tornado', HelloHandler),
-      ('/websocket', MyWebSocket),
-      ])
-  server = tornado.httpserver.HTTPServer(tornado_app)
-  server.listen(options.port)
-  tornado.ioloop.IOLoop.instance().start()
+@app.route('/signUpUser', methods=['POST'])
+def signUpUser():
+    user =  request.form['username'];
+    password = request.form['password'];
+    return json.dumps({'status':'OK','user':user,'pass':password});
+    
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    vars = request.data
+    return ', '.join([str(i) for i in vars])
 
 if __name__ == '__main__':
-  main()
+    app.run(host='0.0.0.0', port='5000')
