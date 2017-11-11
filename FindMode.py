@@ -1,8 +1,10 @@
 import math
 import numpy
+import pickle
+import ReadAndCreateDic as reader
 
-def findMode(dow, lat, log, radius, data):
-    
+def findMode(dow, lat, log, radius):
+    data = reader.getData()
     open_dicPrimaryCause = open("dicPrimaryCause.pickle", "rb")
     dicPrimaryCause = pickle.load(open_dicPrimaryCause)
     open_dicPrimaryCause.close()
@@ -10,7 +12,7 @@ def findMode(dow, lat, log, radius, data):
     open_dicCrashType = open("dicCrashType.pickle", "rb")
     dicCrashType = pickle.load(open_dicCrashType)
     open_dicCrashType.close()
-        
+            
     df_filtered = data[((data['LATITUDE'] >= lat-radius) & (data['LATITUDE'] <= lat+radius))]
     df_filtered = df_filtered[((df_filtered['LONGITUDE'] >= log-radius) & (df_filtered['LONGITUDE'] <= log+radius))]
     df_filtered = df_filtered[(df_filtered['DAY_OF_WEEK_DESC'] == dow)]

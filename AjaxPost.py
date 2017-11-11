@@ -20,8 +20,8 @@ def predictIncident():
     day = dicDayValues.get(dayOfWeek)
     #Calculate mode Primary Cause and Crash Type for comparison to our model's return data
     #We need to remove radius and replace it with a list latitude, longitude values
-    modePrimaryCause = FindMode.findMode(day, time, radius, latitude, longitude)
-    modeCrashType = FindMode.findMode(day, time, radius, latitude, longitude)
+    modePrimaryCause = FindMode.findMode(dayOfWeek, lat, log, radius)
+    modeCrashType = FindMode.findMode(dayOfWeek, lat, log, radius)
         
 #     pCDataFrame = pd.DataFrame()
 #     cTDataFrame = pd.DataFrame

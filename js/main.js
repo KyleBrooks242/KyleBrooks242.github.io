@@ -167,6 +167,13 @@ function initMap() {
     google.maps.event.addListener(myMarker, 'dragend', function(evt){
         $( "#lat" ).val(evt.latLng.lat());
         $( "#long" ).val(evt.latLng.lng());
+        circle.setMap(null);
+	    circle = new google.maps.Circle({
+	    	  map: map,
+	    	  radius: $("#radius").val() * 1609.34,
+	    	  fillColor: '#AA0000'
+	    	});
+	    circle.bindTo('center', myMarker, 'position');
     });
     
     map.setCenter(myMarker.position);
@@ -176,32 +183,75 @@ function initMap() {
     {
     	$( "#lat" ).val(event.latLng.lat());
         $( "#long" ).val(event.latLng.lng());
+        myMarker.setMap(null);
     	myMarker = new google.maps.Marker({
-            position: new google.maps.LatLng({lat: 35.2271, lng: -80.8431}),
+            position: new google.maps.LatLng({lat: event.latLng.lat(), lng: event.latLng.lng()}),
             draggable: true,
             map: map,
             icon: 'blue_MarkerH.png'
         });
+    	circle.setMap(null);
+	    circle = new google.maps.Circle({
+	    	  map: map,
+	    	  radius: $("#radius").val() * 1609.34,
+	    	  fillColor: '#AA0000'
+	    	});
+	    circle.bindTo('center', myMarker, 'position');
        
     });
     
     circle = new google.maps.Circle({
   	  map: map,
-  	  radius: $("#radius").val * 1609.34,
+  	  radius: $("#radius").val() * 1609.34,
   	  fillColor: '#AA0000'
   	});
     circle.bindTo('center', myMarker, 'position');	
     
     $("#radius").on("change", function () {
-    	if (myMarker != null) {
-    		circle.setMap(null);
-    		circle = new google.maps.Circle({
-    			  map: map,
-    			  radius: $("#radius").val * 1609.34,
-    			  fillColor: '#AA0000'
-    			});
-    		circle.bindTo('center', myMarker, 'position');
-    	}
+	    circle.setMap(null);
+	    circle = new google.maps.Circle({
+	    	  map: map,
+	    	  radius: $("#radius").val() * 1609.34,
+	    	  fillColor: '#AA0000'
+	    	});
+	    circle.bindTo('center', myMarker, 'position');
+    });
+    
+    $('#goButton').click(function(){
+    	var dayOfWeek = $("#dayOfWeekSelection").find(":selected").text();
+    	var time = $("#time").val();
+    	var lat = parseInt($("#lat").val());
+    	var long = parseInt($("#long").val());
+    	var radius = $("#radius").val();
+    	
+    	myMarker.setMap(null);
+    	myMarker = new google.maps.Marker({
+            position: new google.maps.LatLng({lat: lat, lng: long}),
+            draggable: true,
+            map: map,
+            icon: 'blue_MarkerH.png'
+        });
+    	myMarker.setMap(map);
+    	circle.setMap(null);
+	    circle = new google.maps.Circle({
+	    	  map: map,
+	    	  radius: $("#radius").val() * 1609.34,
+	    	  fillColor: '#AA0000'
+	    	});
+	    circle.bindTo('center', myMarker, 'position');
+    	
+    	console.log(dayOfWeek + " " + time + " " + lat + " " + long + " " + radius);
+        $.ajax({
+            url: 'http://127.0.0.1:5000/predictIncident',
+            data: {"dayOfWeek":dayOfWeek, "time":time, "lat":lat, "long":long},
+            type: 'POST',
+            success: function(response){
+                console.log(response);
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
     });
 }
 
@@ -217,24 +267,3 @@ hours = now.getHours();
 	
 now = "0" + hours + ':' + now.getMinutes() + ":" + now.getSeconds();
 $( "#time").val(now);
-
-$('#goButton').click(function(){
-	var dayOfWeek = $("#dayOfWeekSelection").find(":selected").text();
-	var time = $("#time").val();
-	var lat = $("#lat").val();
-	var long = $("#long").val();
-	var radius = $("#radius").val();
-	
-	console.log(dayOfWeek + " " + time + " " + lat + " " + long + " " + radius);
-    $.ajax({
-        url: 'http://127.0.0.1:5000/predictIncident',
-        data: {"dayOfWeek":dayOfWeek, "time":time, "lat":lat, "long":long},
-        type: 'POST',
-        success: function(response){
-            console.log(response);
-        },
-        error: function(error){
-            console.log(error);
-        }
-    });
-});
