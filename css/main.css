@@ -23,6 +23,7 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 
 .sidebarFields {
 	padding-top: 40px;
+	display: block;
 }
 
 #go{

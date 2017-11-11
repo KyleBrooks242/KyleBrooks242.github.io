@@ -5,9 +5,12 @@ app = Flask(__name__)
 
 @app.route('/predictIncident', methods=['POST'])
 def predictIncident():
-    user =  request.form['username'];
-    password = request.form['password'];
-    return json.dumps({'status':'OK','user':user,'pass':password});
+    dayOfWeek =  request.form['dayOfWeek']
+    time = request.form['time']
+    lat = request.form['lat']
+    long = request.form['long']
+    
+    return json.dumps({'status':'OK'});
 
 if __name__=="__main__":
     app.run()

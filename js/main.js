@@ -1,3 +1,6 @@
+var selectedLocationMarker;
+var map;
+
 function initMap() {	
 	var myLatLng = {lat: 35.2271, lng: -80.8431};
 	
@@ -28,7 +31,7 @@ function initMap() {
 		rotateControl: false
 	}
 	
-	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	
 	// Charlotte map marker
 	var marker = new google.maps.Marker({
@@ -192,16 +195,49 @@ hours = now.getHours();
 now = "0" + hours + ':' + now.getMinutes() + ":" + now.getSeconds();
 $( "#time").val(now);
 
+selectedLocationMarker = new google.maps.Marker({
+	  map: map,
+	  position: new google.maps.LatLng(lat, long),
+	  title: 'Selected Location'
+});
+
+var circle = new google.maps.Circle({
+	  map: map,
+	  radius: $("#radius").val * 1609.34,
+	  fillColor: '#AA0000'
+	});
+circle.bindTo('center', marker, 'position');
+
+
+$("#radius").on("change", function () {
+	if (selectedLocationMarker != null) {
+		circle.setMap(null);
+		circle = new google.maps.Circle({
+			  map: map,
+			  radius: $("#radius").val * 1609.34,
+			  fillColor: '#AA0000'
+			});
+		circle.bindTo('center', marker, 'position');
+	}
+});
+
 $('#goButton').click(function(){
-        $.ajax({
-            url: 'http://127.0.0.1:5000/predictIncident',
-            data: {"username":"username","password":"password"},
-            type: 'POST',
-            success: function(response){
-                console.log(response);
-            },
-            error: function(error){
-                console.log(error);
-            }
-        });
+	var dayOfWeek = $("#dayOfWeekSelection").find(":selected").text();
+	var time = $("#time").val();
+	var lat = $("#lat").val();
+	var long = $("#long").val();
+	var radius = $("#radius").val();
+	
+	console.log(dayOfWeek + " " + time + " " + lat + " " + long + " " + radius);
+    $.ajax({
+        url: 'http://127.0.0.1:5000/predictIncident',
+        data: {"dayOfWeek":dayOfWeek, "time":time, "lat":lat, "long":long},
+        type: 'POST',
+        success: function(response){
+            console.log(response);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
 });
