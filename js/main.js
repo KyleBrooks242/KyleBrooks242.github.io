@@ -2,6 +2,10 @@ function initMap() {
 	
 	var myLatLng = {lat: 35.2271, lng: -80.8431};
 	
+	var pncMusicPavillionLatLng = {lat: 35.3274, lng: -80.7107};
+	
+	var spectrumLatLng = {lat: 35.2251, lng: -80.8392};
+	
 	var maxZoomLevel = 11;
 	
 	var mapOptions = {
@@ -27,17 +31,15 @@ function initMap() {
 	
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 	
+	// Charlotte map marker
 	var marker = new google.maps.Marker({
 		position: myLatLng,
 		map: map,
-		title: 'Statesville High School'
+		title: 'Charlotte, NC'
 	});
 	
-	var trafficLayer = new google.maps.TrafficLayer();
-	trafficLayer.setMap(map);
-	
 	var contentString = '<div id="content">'+
-	'<h1>Statesville High School</h1>'+ 'This highschool was founded in blah blah blah..'
+	'<h1>Charlotte, NC</h1>'+ 'Welcome to the Queen City!'
 	'</div>';
 	
 	var infowindow = new google.maps.InfoWindow({
@@ -48,6 +50,48 @@ function initMap() {
 		infowindow.open(map, marker);
 	});
 	
+	
+	// PNC Pavillion map marker
+	var pncMarker = new google.maps.Marker({
+		position: pncMusicPavillionLatLng,
+		map: map,
+		title: 'PNC Music Pavillion'
+	});
+	
+	var pncContentString = '<div id="content">'+
+	'<h1>PNC Music Pavillion</h1>'+ 'Music Venue'
+	'</div>';
+	
+	var pncInfowindow = new google.maps.InfoWindow({
+		content: pncContentString
+	});
+	
+	pncMarker.addListener('click', function() {
+		pncInfowindow.open(map, pncMarker);
+	});
+	
+	
+	// Spectrum Center
+	var spectrumMarker = new google.maps.Marker({
+		position: spectrumLatLng,
+		map: map,
+		title: 'Spectrum Center'
+	});
+	
+	var spectrumContentString = '<div id="content">'+
+	'<h1>Spectrum Center</h1>'+ 'Arena'
+	'</div>';
+	
+	var spectrumInfowindow = new google.maps.InfoWindow({
+		content: spectrumContentString
+	});
+	
+	spectrumMarker.addListener('click', function() {
+		spectrumInfowindow.open(map, spectrumMarker);
+	});
+	
+	var trafficLayer = new google.maps.TrafficLayer();
+	trafficLayer.setMap(map);
 	
 	var polygonMask = new google.maps.Polygon({
 		map:map,
