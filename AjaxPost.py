@@ -14,10 +14,20 @@ def predictIncident():
     time = request.form['time']
     lat = request.form['lat']
     long = request.form['long']
+    radius = request.form['radius']
+    latLngPoints = request.form['latLngPoints']
     
     dicDayValues = {'Sunday':'0','Monday':'1', 'Tuesday':'2','Wednesday':'3',
                     'Thursday':'4','Friday':'5','Saturday':'6'}
     
+    latPoints = []
+    lngPoints = []
+    counter = 0;
+    for key, value in latLngPoints.items():
+        latPoints[counter] = key
+        lngPoints[counter] = value
+        counter = counter + 1
+        
     day = dicDayValues.get(dayOfWeek)
     #Calculate mode Primary Cause and Crash Type for comparison to our model's return data
     #We need to remove radius and replace it with a list latitude, longitude values
