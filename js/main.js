@@ -25,20 +25,3 @@ function initMap() {
 	
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
-
-$('#testButton').click(function(){
-	console.log("PLEASE WORK NOW");
-	var user = $('#txtUsername').val();
-	var pass = $('#txtPassword').val();
-	$.ajax({
-		url: 'https://kylebrooks242.github.io/signUpUser',
-		data: $('form').serialize(),
-		type: 'POST',
-		success: function(response){
-			console.log(response);
-		},
-		error: function(error){
-			console.log(error);
-		}
-	});
-});
