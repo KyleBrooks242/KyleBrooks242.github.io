@@ -26,18 +26,20 @@ function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
 
-$('#testButton').click(function(){
-    console.log("posting to AjaxPost.py")
-
-    $.ajax({
-        url: '/predictAccident',
-        data: {'key':'value','key2':'value2'},
-        type: 'POST',
-        success: function(response) {
-            console.log(response);
-        },
-        error: function(error) {
-            console.log(error);
-        }
+$(function() {
+    $('button').click(function() {
+        var user = $('#txtUsername').val();
+        var pass = $('#txtPassword').val();
+        $.ajax({
+            url: '/signUpUser',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+                console.log(response);
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
     });
 });
