@@ -120,7 +120,7 @@ function initMap() {
 	
 	// Bounds for North America
     var strictBounds = new google.maps.LatLngBounds(
-    	new google.maps.LatLng(35.2429, -81.0373), 
+    	new google.maps.LatLng(34.7049, -81.2143), 
         new google.maps.LatLng(35.4088, -80.5795)
     );
 
