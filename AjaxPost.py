@@ -9,10 +9,12 @@ def hello():
 
 @app.route('/signUp')
 def signUp():
+    print("got in get")
     return render_template('signUp.html')
 
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
+    print("got in post")
     user =  request.form['username'];
     password = request.form['password'];
     return json.dumps({'status':'OK','user':user,'pass':password});
