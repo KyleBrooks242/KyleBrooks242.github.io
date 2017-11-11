@@ -17,7 +17,7 @@ def signUpUser():
     password = request.form['password'];
     return json.dumps({'status':'OK','user':user,'pass':password});
     
-@app.route('/test', methods=['GET', 'POST'])
+@app.route('/test', methods=['GET', 'PUT'])
 def test():
     vars = request.data
     return ', '.join([str(i) for i in vars])

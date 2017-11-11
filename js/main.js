@@ -29,9 +29,9 @@ function initMap() {
 $('#testButton').click(function(){
 	 console.log("test");
 	 $.ajax({
-           type: "POST",
+           type: "PUT",
            headers: {"Content-Type": "application/json"},
-           url: "http://localhost:5000/test",
+           url: "/test",
            data: JSON.stringify({"key": "value"}),
            success: function(response) {
                console.log(response);
