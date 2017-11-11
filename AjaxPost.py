@@ -22,5 +22,10 @@ def test():
     vars = request.data
     return ', '.join([str(i) for i in vars])
 
+@app.route('/test2/',methods=['POST', 'GET'])
+def ajaxcalc():
+    vars = request.data
+    return ', '.join([str(i) for i in vars])
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port='5000')
