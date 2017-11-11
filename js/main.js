@@ -174,6 +174,15 @@ $( "#lat" ).val("35.2271");
 
 $( "#long" ).val("80.8431");
 
+var now = new Date();
+
+hours = now.getHours();
+//if (now.getHours().includes("0"))
+//	hours = "0" + now.getHours();
+	
+now = "0" + hours + ':' + now.getMinutes() + ":" + now.getSeconds();
+$( "#time").val(now);
+
 $('#goButton').click(function(){
         $.ajax({
             url: 'http://127.0.0.1:5000/predictIncident',
