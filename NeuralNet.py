@@ -7,7 +7,7 @@ from sklearn import preprocessing, cross_validation, svm
 import numpy as np
 
 data = reader.getData()
-modePrimaryCause, modeCrashType = FindMode.findMode('Sunday', 35.19705901, -80.93564375, 20, data)
+#modePrimaryCause, modeCrashType = FindMode.findMode('Sunday', 35.19705901, -80.93564375, 20, data)
 
 
 # dicPrimaryCause, dicCrashType, dicDayValues = reader.createDictionary()
@@ -36,7 +36,7 @@ open_dicCrashType.close()
 # open_dicDayValues.close()
 
  
-print(dicPrimaryCause[modePrimaryCause], dicCrashType[modeCrashType])
+#print(dicPrimaryCause[modePrimaryCause], dicCrashType[modeCrashType])
 print(data.head())
  
 X = np.array(data[['MILT_TIME', 'LATITUDE', 'LONGITUDE']].as_matrix())

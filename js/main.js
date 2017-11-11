@@ -265,7 +265,7 @@ function initMap() {
     	console.log(dayOfWeek + " " + time + " " + lat + " " + long + " " + radius);
         $.ajax({
             url: 'http://127.0.0.1:5000/predictIncident',
-            data: {"dayOfWeek":dayOfWeek, "time":time, "lat":lat, "long":long},
+            data: {"dayOfWeek":dayOfWeek, "time":time, "lat":lat, "long":long, "radius": radius},
             type: 'POST',
             success: function(response){
                 console.log(response);
