@@ -167,6 +167,15 @@ function initMap() {
     
     map.setCenter(myMarker.position);
     myMarker.setMap(map)
+    
+    var iwindow= new google.maps.InfoWindow;
+    google.maps.event.addListener(map,'click',function(event)
+    {
+    	$( "#lat" ).val(event.latLng.lat());
+        $( "#long" ).val(event.latLng.lng());
+        iwindow.setContent(event.latLng.lat()+","+event.latLng.lng());
+        iwindow.open(map,this); 
+    });
 	
 }
 
