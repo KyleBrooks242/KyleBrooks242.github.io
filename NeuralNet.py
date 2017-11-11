@@ -10,22 +10,30 @@ data = reader.getData()
 modePrimaryCause, modeCrashType = FindMode.findMode('Sunday', 35.19705901, -80.93564375, 20, data)
 
 
-# dicPrimaryCause, dicCrashType = reader.createDictionary()
+# dicPrimaryCause, dicCrashType, dicDayValues = reader.createDictionary()
 # save_dicPrimaryCause = open("dicPrimaryCause.pickle","wb")
 # pickle.dump(dicPrimaryCause, save_dicPrimaryCause)
 # save_dicPrimaryCause.close()
-# 
+#  
 # save_dicCrashType = open("dicCrashType.pickle","wb")
 # pickle.dump(dicCrashType, save_dicCrashType)
 # save_dicCrashType.close()
+# 
+# save_dicDayValues = open("dicDayValues.pickle", "wb")
+# pickle.dump(dicDayValues, save_dicDayValues)
+# save_dicDayValues.close()
 
 open_dicPrimaryCause = open("dicPrimaryCause.pickle", "rb")
 dicPrimaryCause = pickle.load(open_dicPrimaryCause)
 open_dicPrimaryCause.close()
- 
+  
 open_dicCrashType = open("dicCrashType.pickle", "rb")
 dicCrashType = pickle.load(open_dicCrashType)
 open_dicCrashType.close()
+
+open_dicDayValues = open("dicDayValues.pickle", "rb")
+dicDayValues = pickle.load(open_DicDayValues)
+open_dicDayValues.close()
 
  
 print(dicPrimaryCause[modePrimaryCause], dicCrashType[modeCrashType])
