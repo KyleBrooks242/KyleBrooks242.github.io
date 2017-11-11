@@ -32,6 +32,7 @@ $('#testButton').click(function(){
 	var pass = $('#txtPassword').val();
 	$.ajax({
 		url: '/signUpUser',
+		dataType: "jsonp",
 		data: $('form').serialize(),
 		type: 'POST',
 		success: function(response){
