@@ -31,7 +31,7 @@ $('#testButton').click(function(){
 
     $.ajax({
         url: '/predictAccident',
-        data: data: {'key':'value','key2':'value2'},
+        data: {'key':'value','key2':'value2'},
         type: 'POST',
         success: function(response) {
             console.log(response);
