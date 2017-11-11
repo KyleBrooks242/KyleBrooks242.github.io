@@ -242,8 +242,8 @@ function initMap() {
     $('#goButton').click(function(){
     	var dayOfWeek = $("#dayOfWeekSelection").find(":selected").text();
     	var time = $("#time").val();
-    	var lat = parseInt($("#lat").val());
-    	var long = parseInt($("#long").val());
+    	var lat = parseFloat($("#lat").val());
+    	var long = parseFloat($("#long").val());
     	var radius = $("#radius").val();
     	
     	myMarker.setMap(null);
@@ -253,7 +253,10 @@ function initMap() {
             map: map,
             icon: 'blue_MarkerH.png'
         });
+    	
     	myMarker.setMap(map);
+    	map.setCenter(myMarker.position);
+    	
     	circle.setMap(null);
 	    circle = new google.maps.Circle({
 	    	  map: map,
