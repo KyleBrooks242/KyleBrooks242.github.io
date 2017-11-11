@@ -1,13 +1,20 @@
 html,body { height: 100%; margin: 0px; padding: 0px; }
 
+#map{
+	float: left;
+	width: 80%;
+	height: 100%;
+}
+
 #sidebar{
 	float: right;
 	background: #696969;
-	max-width: 350px;
+	width: 20%;
 	color: white;
-	display: block;
 	height: 100%;
 	font-size: 18px;
+	padding-top: 2%;
+	padding-left: 2%;
 }
 
 #sidebar span {
@@ -18,14 +25,15 @@ html,body { height: 100%; margin: 0px; padding: 0px; }
 	padding-top: 40px;
 }
 
+#go{
+	float: right;
+	padding-right: 15%;
+}
+
 #dayOfWeek {
 	padding-top: 50px;
 }
 
 label {
 	padding-right: 20px;
-}
-
-#map {
-	height: 100%;
 }
