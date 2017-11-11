@@ -37,7 +37,7 @@ y = np.array(data['PRIMARY_CAUSE_CD'])
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
    
 # n_nodes_hl1 = 500 
-# n_nodes_hl2 = 500
+# n_nodes_hl2 = 500 
 # n_nodes_hl3 = 500
 #     
 # n_classes = len(dicPrimaryCause)
