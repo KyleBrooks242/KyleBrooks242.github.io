@@ -31,7 +31,7 @@ $('#testButton').click(function(){
 	 $.ajax({
            type: "GET",
            headers: {"Content-Type": "application/json"},
-           url: "/test/",
+           url: "/kylebrooks242.github.io/",
            data: JSON.stringify({"key": "value"}),
            success: function(response) {
                console.log(response);
