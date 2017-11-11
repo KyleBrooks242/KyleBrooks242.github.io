@@ -38,7 +38,17 @@
 				<label for= 'long'>Longitude:</label>
 				<input id= 'long' type='text' maxlength='9'>
 			</div> 
-             <button id='testButton' class="btn btn-lg btn-primary btn-block" type="button">Register </button>
+             <form class="form-signin ajax" action="/signIn" method="post" data-replace="#res"  role="form">
+		        <h2 class="form-signin-heading">Please sign in</h2>
+		        <input type="email" name="username" class="form-control" placeholder="Email address" required autofocus>
+		        <input type="password" name="password" class="form-control" placeholder="Password" required>
+		        <div class="checkbox">
+		          <label>
+		            <input type="checkbox" value="remember-me"> Remember me
+		          </label>
+		        </div>
+		        <button id='testButton' class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	      	</form>
 		</div>
 		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

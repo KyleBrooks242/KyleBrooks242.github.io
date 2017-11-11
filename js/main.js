@@ -26,15 +26,19 @@ function initMap() {
 	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
 
-$("#testButton").click(function() {
-	console.log("testing a post");
-    var input_string = "Test";
-    $.ajax({
-            type: "POST",
-            data: {textfield : input_string},
-            success: function(data) {
-            	console.log("SUCCESS!!!!");
-            },
-            });
-    return false;
+$('#testButton').click(function(){
+	console.log("PLEASE");
+	var user = $('#txtUsername').val();
+	var pass = $('#txtPassword').val();
+	$.ajax({
+		url: '/signUpUser',
+		data: $('form').serialize(),
+		type: 'POST',
+		success: function(response){
+			console.log(response);
+		},
+		error: function(error){
+			console.log(error);
+		}
+	});
 });
