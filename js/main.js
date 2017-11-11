@@ -1,5 +1,6 @@
-var selectedLocationMarker;
 var map;
+var myMarker;
+var circle;
 
 function initMap() {	
 	var myLatLng = {lat: 35.2271, lng: -80.8431};
@@ -156,7 +157,7 @@ function initMap() {
     		map.setZoom(maxZoomLevel);
     });
     
-    var myMarker = new google.maps.Marker({
+    myMarker = new google.maps.Marker({
         position: new google.maps.LatLng(myLatLng),
         draggable: true,
         map: map,
@@ -171,15 +172,37 @@ function initMap() {
     map.setCenter(myMarker.position);
     myMarker.setMap(map)
     
-    var iwindow= new google.maps.InfoWindow;
     google.maps.event.addListener(map,'click',function(event)
     {
     	$( "#lat" ).val(event.latLng.lat());
         $( "#long" ).val(event.latLng.lng());
-        iwindow.setContent(event.latLng.lat()+","+event.latLng.lng());
-        iwindow.open(map,this); 
+    	myMarker = new google.maps.Marker({
+            position: new google.maps.LatLng({lat: 35.2271, lng: -80.8431}),
+            draggable: true,
+            map: map,
+            icon: 'blue_MarkerH.png'
+        });
+       
     });
-	
+    
+    circle = new google.maps.Circle({
+  	  map: map,
+  	  radius: $("#radius").val * 1609.34,
+  	  fillColor: '#AA0000'
+  	});
+    circle.bindTo('center', myMarker, 'position');	
+    
+    $("#radius").on("change", function () {
+    	if (myMarker != null) {
+    		circle.setMap(null);
+    		circle = new google.maps.Circle({
+    			  map: map,
+    			  radius: $("#radius").val * 1609.34,
+    			  fillColor: '#AA0000'
+    			});
+    		circle.bindTo('center', myMarker, 'position');
+    	}
+    });
 }
 
 $( "#lat" ).val("35.2271");
@@ -194,32 +217,6 @@ hours = now.getHours();
 	
 now = "0" + hours + ':' + now.getMinutes() + ":" + now.getSeconds();
 $( "#time").val(now);
-
-selectedLocationMarker = new google.maps.Marker({
-	  map: map,
-	  position: new google.maps.LatLng(lat, long),
-	  title: 'Selected Location'
-});
-
-var circle = new google.maps.Circle({
-	  map: map,
-	  radius: $("#radius").val * 1609.34,
-	  fillColor: '#AA0000'
-	});
-circle.bindTo('center', marker, 'position');
-
-
-$("#radius").on("change", function () {
-	if (selectedLocationMarker != null) {
-		circle.setMap(null);
-		circle = new google.maps.Circle({
-			  map: map,
-			  radius: $("#radius").val * 1609.34,
-			  fillColor: '#AA0000'
-			});
-		circle.bindTo('center', marker, 'position');
-	}
-});
 
 $('#goButton').click(function(){
 	var dayOfWeek = $("#dayOfWeekSelection").find(":selected").text();

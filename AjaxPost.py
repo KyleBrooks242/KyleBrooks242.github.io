@@ -2,6 +2,7 @@ import os
 import FindMode
 import NeuralNet
 import pandas as pd
+import pickle
 from flask import Flask,render_template, request,json
 
 app = Flask(__name__)
@@ -22,23 +23,23 @@ def predictIncident():
     modePrimaryCause = FindMode.findMode(day, time, radius, latitude, longitude)
     modeCrashType = FindMode.findMode(day, time, radius, latitude, longitude)
         
-    pCDataFrame = pd.DataFrame()
-    cTDataFrame = pd.DataFrame
-    for i in len(lat):
-        pCDataFrame.append(NeuralNet.predictValue(day, time, latitude[i], longitude[i]))
-        cTDataFrame.append(NeuralNet.predictValue(day, time, latitude[i], longitude[i]))
-        
-    predictedPrimaryCauseVal = pCDataFrame.mode()
-    predictedCrashTypeVal = cTDataFrame.mode()
-    
-    dicPrimaryCause, dicCrashType = loadDictionaries()
-    
-    predictedPrimaryCause = dicPrimaryCause.get(predictedPrimaryCauseVal)
-    predictedCrashType = dicCrashType.get(predictedCrashTypeVal)
+#     pCDataFrame = pd.DataFrame()
+#     cTDataFrame = pd.DataFrame
+#     for i in len(lat):
+#         pCDataFrame.append(NeuralNet.predictValue(day, time, latitude[i], longitude[i]))
+#         cTDataFrame.append(NeuralNet.predictValue(day, time, latitude[i], longitude[i]))
+#         
+#     predictedPrimaryCauseVal = pCDataFrame.mode()
+#     predictedCrashTypeVal = cTDataFrame.mode()
+#     
+#     dicPrimaryCause, dicCrashType = loadDictionaries()
+#     
+#     predictedPrimaryCause = dicPrimaryCause.get(predictedPrimaryCauseVal)
+#     predictedCrashType = dicCrashType.get(predictedCrashTypeVal)
     
     
     return json.dumps({'status':'OK','modePrimaryCause':modePrimaryCause,'modeCrashType':modeCrashType,
-                       'predictedPrimaryCause':predictedPrimaryCause,'predictedCrashType':predictedCrashType})
+                       'predictedPrimaryCause':"primaryCause",'predictedCrashType':"predictedCrashType"})
     #return json.dumps({'status':'OK','user':user,'pass':password})
 
 def loadDictionaries():
