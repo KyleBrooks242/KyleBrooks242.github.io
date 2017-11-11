@@ -160,15 +160,21 @@ $( "#lat" ).val("35.2271");
 $( "#long" ).val("80.8431");
 
 $('#goButton').click(function(){
-        $.ajax({
-            url: 'http://127.0.0.1:5000/predictIncident',
-            data: {"username":"username","password":"password"},
-            type: 'POST',
-            success: function(response){
-                console.log(response);
-            },
-            error: function(error){
-                console.log(error);
-            }
-        });
+	var dayOfWeek = $("#dayOfWeekSelection").find(":selected").text();
+	var time = $("#time").val();
+	var lat = $("#lat").val();
+	var long = $("#long").val();
+	
+	console.log(dayOfWeek + " " + time + " " + lat + " " + long);
+    $.ajax({
+        url: 'http://127.0.0.1:5000/predictIncident',
+        data: {"dayOfWeek":dayOfWeek, "time":time, "lat":lat, "long":long},
+        type: 'POST',
+        success: function(response){
+            console.log(response);
+        },
+        error: function(error){
+            console.log(error);
+        }
+    });
 });
