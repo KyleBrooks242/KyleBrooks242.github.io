@@ -27,13 +27,13 @@ function initMap() {
 }
 
 $('#testButton').click(function(){
-	console.log("PLEASE WORK");
+	console.log("PLEASE WORK NOW");
 	var user = $('#txtUsername').val();
 	var pass = $('#txtPassword').val();
 	$.ajax({
 		url: 'https://kylebrooks242.github.io/signUpUser',
 		data: $('form').serialize(),
-		type: 'GET',
+		type: 'POST',
 		success: function(response){
 			console.log(response);
 		},
